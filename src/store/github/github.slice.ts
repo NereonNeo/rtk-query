@@ -2,8 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const LS_FV_KEY = 'rfk'
 
+type Endpoint = {
+    login: string,
+    url: string
+}
+
 interface GithubState {
-    favourites: string[]
+    favourites: Endpoint[]
 }
 
 const initialState: GithubState = {
@@ -14,12 +19,12 @@ export const githubSlice = createSlice({
     name: 'github-slice',
     initialState,
     reducers: {
-        addFavourite(state, action: PayloadAction<string>) {
+        addFavourite(state, action: PayloadAction<Endpoint>) {
             state.favourites.push(action.payload);
             localStorage.setItem(LS_FV_KEY, JSON.stringify(state.favourites))
         },
-        removeFavourite(state, action: PayloadAction<string>) {
-            state.favourites = state.favourites.filter(f => f !== action.payload)
+        removeFavourite(state, action: PayloadAction<Endpoint>) {
+            state.favourites = state.favourites.filter(f => f.url !== action.payload.url)
             localStorage.setItem(LS_FV_KEY, JSON.stringify(state.favourites))
         }
     }

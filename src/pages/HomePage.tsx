@@ -26,6 +26,7 @@ const HomePage = () => {
   useEffect(() => {
     setDropDown(debounced.length > 3 && data?.length! > 0);
   }, [debounced, data]);
+  console.log(data);
 
   return (
     <div className="flex justify-center pt-10 mx-auto h-screen w-auto">
